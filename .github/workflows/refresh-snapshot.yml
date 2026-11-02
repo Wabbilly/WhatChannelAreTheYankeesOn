@@ -10,9 +10,11 @@ on:
     - cron: '0 */3 * * *'
   workflow_dispatch: {}
 
-# Allow the workflow to commit the regenerated index.html back to the repo.
+# contents: commit the regenerated index.html back to the repo.
+# issues:   let the health check open an issue when something needs a human.
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: refresh-snapshot
@@ -44,3 +46,14 @@ jobs:
           else
             echo "No snapshot change to commit."
           fi
+
+      # Watchdog: never writes files, never fails the job. Opens a GitHub
+      # issue if a broadcaster is unrecognized, a snapshot marker has
+      # drifted, JSON-LD stopped parsing, or the two copies of the channel
+      # classifier have fallen out of lockstep.
+      - name: Site health check
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/check-health.mjs

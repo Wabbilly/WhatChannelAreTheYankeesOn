@@ -1059,13 +1059,6 @@ img.net-logo[src*="YES_Network_logo"] { background: #fff; padding: 2px 3px; }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; font-size: 0.82rem; line-height: 1.7; color: var(--cream-dim); padding: 0 16px; }
 .faq-item.open .faq-a { max-height: 500px; padding: 0 16px 14px; }
 
-/* ============ AD SLOTS ============ */
-.ad-divider { padding: 10px 16px; text-align: center; position: relative; z-index: 1; }
-.ad-label { font-family: var(--f-label); font-size: 0.45rem; letter-spacing: 3px; color: rgba(255,255,255,0.12); text-align: center; margin-bottom: 3px; }
-.ad-slot { max-width: 728px; min-height: 90px; margin: 0 auto; background: rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.03); border-radius: 3px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.ad-slot ins { display: block; width: 100%; }
-@media (max-width: 640px) { .ad-slot { min-height: 60px; } }
-
 /* ============ FOOTER ============ */
 .board-footer { padding: 14px 16px 16px; border-top: 1px solid rgba(255,255,255,0.04); background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
 .footer-stamp { font-family: var(--f-label); font-size: 0.58rem; color: var(--cream-dim); letter-spacing: 1px; opacity: 0.75; }
@@ -1141,7 +1134,6 @@ img.net-logo[src*="YES_Network_logo"] { background: #fff; padding: 2px 3px; }
 .light-mode .channel-badge { background: rgba(12,35,64,0.05); border-color: rgba(12,35,64,0.15); color: #0C2340; }
 .light-mode .weather-data { background: rgba(255,255,255,0.6); }
 .light-mode .fold-panel, .light-mode .game-panel { background: rgba(255,255,255,0.45); }
-.light-mode .ad-label { color: rgba(12,35,64,0.2); }
 .light-mode .attribution-line { color: #8a7a68; }
 .light-mode .bracket-board { background: rgba(255,255,255,0.4); }
 .light-mode .bracket-team { color: #14253d; }
@@ -1375,14 +1367,6 @@ img.net-logo[src*="YES_Network_logo"] { background: #fff; padding: 2px 3px; }
     <div class="leaders-grid" id="leaders-grid"></div>
   </section>
 
-  <!-- AD -->
-  <div class="ad-divider">
-    <div class="ad-label">ADVERTISEMENT</div>
-    <div class="ad-slot">
-      <ins class="adsbygoogle" style="display:block;margin:0 auto" data-ad-client="ca-pub-2736588621894448" data-ad-slot="XXXXXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-    </div>
-  </div>
-
   <div class="pinstripe-divider"></div>
 
   <!-- ============ SCHEDULE ============ -->
@@ -1466,14 +1450,6 @@ img.net-logo[src*="YES_Network_logo"] { background: #fff; padding: 2px 3px; }
     </div>
   </section>
 
-  <!-- AD -->
-  <div class="ad-divider">
-    <div class="ad-label">ADVERTISEMENT</div>
-    <div class="ad-slot">
-      <ins class="adsbygoogle" style="display:block;margin:0 auto" data-ad-client="ca-pub-2736588621894448" data-ad-slot="XXXXXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-    </div>
-  </div>
-
   <div class="pinstripe-divider"></div>
 
   <!-- ============ FAQ ============ -->
@@ -1521,7 +1497,7 @@ img.net-logo[src*="YES_Network_logo"] { background: #fff; padding: 2px 3px; }
 
   <!-- FOOTER -->
   <footer class="board-footer">
-    <div class="footer-stamp">UPDATED: <span id="last-updated">Nov 1, 2026, 7:04 PM ET</span></div>
+    <div class="footer-stamp">UPDATED: <span id="last-updated">Nov 1, 2026, 9:49 PM ET</span></div>
     <div class="footer-controls">
       <button class="board-btn" onclick="refreshAll()">&#x27F3; REFRESH</button>
       <button class="board-btn" id="theme-btn" onclick="toggleTheme()">&#x2600; LIGHT</button>
@@ -1787,7 +1763,7 @@ function getBLink(n) { if(!n) return ''; const u = n.toUpperCase(); for (const [
 // show: national exclusives suppress YES (blackout); opponent RSNs and radio
 // are dropped; when data is missing we never assert a channel ("YES likely").
 const NATIONAL_NAME_HINTS = ['ESPN','FOX','FS1','TBS','PEACOCK','APPLE','NETFLIX','ROKU','TNT','MAX','MLB NETWORK'];
-const OPP_RSN = ['NESN','SNY','MASN','BALLY','FANDUEL','ROOT','MARQUEE','SPACE CITY','MARINERS','SPORTSNET','SPECTRUM SPORTSNET','NBCS','NBC SPORTS','MSG'];
+const OPP_RSN = ['NESN','SNY','MASN','BALLY','FANDUEL','ROOT','MARQUEE','SPACE CITY','MARINERS','SPORTSNET','SPECTRUM SPORTSNET','NBCS','NBC SPORTS','MSG','CHSN','CHICAGO SPORTS','RANGERS SPORTS','.TV'];
 const NET_DISPLAY = { 'YES':'YES Network', 'MLBN':'MLB Network', 'SNP':'SportsNet Pittsburgh', 'SNY':'SNY', 'ABC':'ABC' };
 function netDisplay(name) { return NET_DISPLAY[(name||'').toUpperCase()] || name; }
 
@@ -2880,17 +2856,8 @@ function renderGames() {
       html += buildGameCard(game, realIdx, realIdx === nextIdx);
     });
     html += '</div>';
-    if (i < combined.length - 1 && i % 3 === 2) {
-      html += `<div class="ad-divider"><div class="ad-label">ADVERTISEMENT</div><div class="ad-slot"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2736588621894448" data-ad-slot="XXXXXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins></div></div>`;
-    }
   });
   sec.innerHTML = html;
-
-  try {
-    document.querySelectorAll('.ad-slot ins.adsbygoogle').forEach(el => {
-      if (!el.dataset.adsbygoogleDone) { (window.adsbygoogle = window.adsbygoogle || []).push({}); el.dataset.adsbygoogleDone = '1'; }
-    });
-  } catch(e) {}
 
   updateLoadMoreBtn();
   injectGameSchema();

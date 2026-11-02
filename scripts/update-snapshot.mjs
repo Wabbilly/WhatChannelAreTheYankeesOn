@@ -26,7 +26,7 @@ const TZ = 'America/New_York';
 
 // ---- Broadcast resolution — kept in lockstep with resolveYankeesTV() in index.html ----
 const NATIONAL_NAME_HINTS = ['ESPN','FOX','FS1','TBS','PEACOCK','APPLE','NETFLIX','ROKU','TNT','MAX','MLB NETWORK'];
-const OPP_RSN = ['NESN','SNY','MASN','BALLY','FANDUEL','ROOT','MARQUEE','SPACE CITY','MARINERS','SPORTSNET','SPECTRUM SPORTSNET','NBCS','NBC SPORTS','MSG'];
+const OPP_RSN = ['NESN','SNY','MASN','BALLY','FANDUEL','ROOT','MARQUEE','SPACE CITY','MARINERS','SPORTSNET','SPECTRUM SPORTSNET','NBCS','NBC SPORTS','MSG','CHSN','CHICAGO SPORTS','RANGERS SPORTS','.TV'];
 
 const isTvEntry = (b) => {
   const t = (b.type || '').toUpperCase();
